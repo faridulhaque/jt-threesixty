@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import React from "react";
 import ItemCard from "../components/home/ItemCard";
 import Navbar from "../components/shared/Navbar";
@@ -26,9 +26,8 @@ const HomePage = () => {
         }}
       >
         <Grid
-          
           container
-          rowSpacing={1}
+          rowSpacing={10}
           columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3, xl: 4 }}
         >
           {data.map((d: any) => (
@@ -45,6 +44,10 @@ const HomePage = () => {
             </Grid>
           ))}
         </Grid>
+
+        <Box width="100%" display="flex" alignItems="center" justifyContent="center" marginTop="50px" marginBottom="50px">
+          <Button>See More</Button>
+        </Box>
       </div>
     </>
   );
