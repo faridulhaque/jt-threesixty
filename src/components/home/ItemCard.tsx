@@ -18,16 +18,22 @@ type itemTypes = {
 };
 
 const ItemCard = ({ item }: itemTypes) => {
-  
-  const { mission_name, links, launch_date_utc, launch_success, flight_number } = item;
+  const {
+    mission_name,
+    links,
+    launch_date_utc,
+    launch_success,
+    flight_number,
+    rocket: { rocket_name },
+  } = item;
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <>
       <Card sx={{ maxWidth: 345 }}>
         <CardHeader
-          title={mission_name}
+          title={`${rocket_name} (${mission_name})`}
           subheader={moment(launch_date_utc).format("DD-MMM-yyyy")}
           subheaderTypographyProps={
             launch_success ? { color: "green" } : { color: "red" }
@@ -41,7 +47,10 @@ const ItemCard = ({ item }: itemTypes) => {
         />
         <CardContent></CardContent>
         <CardActions disableSpacing>
-          <Button onClick={()=>navigate(`/${flight_number}`)} aria-label="add to favorites">
+          <Button
+            onClick={() => navigate(`/${flight_number}`)}
+            aria-label="add to favorites"
+          >
             {/* <UnfoldMoreIcon cursor="pointer"></UnfoldMoreIcon> */}
             See More
           </Button>
