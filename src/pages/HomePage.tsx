@@ -1,11 +1,13 @@
 import { Box, Button, Grid } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import ItemCard from "../components/home/ItemCard";
 import Navbar from "../components/shared/Navbar";
 import { useGetAllDataQuery } from "../redux/queries/dataAPI";
 
 const HomePage = () => {
   const { data, isLoading, error } = useGetAllDataQuery(null);
+
+  const [sliced, setSliced] = useState<number>(20);
 
   if (isLoading) {
     return <h2>Loading..</h2>;
@@ -30,7 +32,7 @@ const HomePage = () => {
           rowSpacing={10}
           columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3, xl: 4 }}
         >
-          {data.map((d: any) => (
+          {data.slice(0, sliced).map((d: any) => (
             <Grid
               key={d.flight_number}
               item
@@ -45,8 +47,19 @@ const HomePage = () => {
           ))}
         </Grid>
 
-        <Box width="100%" display="flex" alignItems="center" justifyContent="center" marginTop="50px" marginBottom="50px">
-          <Button>See More</Button>
+        <Box
+          width="100%"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          marginTop="50px"
+          marginBottom="50px"
+        >
+          {sliced >= data.length ? (
+            <Button onClick={() => setSliced(20)}>See Less</Button>
+          ) : (
+            <Button onClick={() => setSliced(sliced + 20)}>See More</Button>
+          )}
         </Box>
       </div>
     </>

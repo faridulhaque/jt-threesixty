@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,6 +15,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import SearchField from "../home/SearchField";
+import FilterField from "../home/FilterField";
+import { GlobalContext } from "../../context/ContextProvider";
 
 interface Props {
   /**
@@ -27,13 +31,16 @@ const drawerWidth = 240;
 const navItems = [
   {
     title: "Home",
-    link: "/",
+    component: null,
   },
   {
     title: "Search",
-    link: "/search",
+    component: <SearchField></SearchField>,
   },
-  
+  {
+    title: "Filter",
+    component: <FilterField></FilterField>,
+  },
 ];
 
 export default function Navbar(props: Props) {
@@ -44,7 +51,19 @@ export default function Navbar(props: Props) {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const navigate = useNavigate()
+  const {
+    navItemsHookData: { dispatch,  },
+  } = useContext(GlobalContext);
+
+  const navigate = useNavigate();
+
+  const handleNavItem = (data: any) => {
+    if (data.type === "Home") {
+      return navigate("/");
+    }
+    dispatch({ type: data.type, payload: data.payload });
+  };
+
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -90,7 +109,13 @@ export default function Navbar(props: Props) {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button onClick={()=>navigate(item.link)} key={item.title} sx={{ color: "#fff" }}>
+              <Button
+                onClick={() =>
+                  handleNavItem({ type: item.title, payload: item.component })
+                }
+                key={item.title}
+                sx={{ color: "#fff" }}
+              >
                 {item.title}
               </Button>
             ))}
@@ -117,7 +142,6 @@ export default function Navbar(props: Props) {
           {drawer}
         </Drawer>
       </Box>
-   
     </Box>
   );
 }
