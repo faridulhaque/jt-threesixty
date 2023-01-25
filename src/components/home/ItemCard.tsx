@@ -33,8 +33,9 @@ const ItemCard = ({ item }: itemTypes) => {
     <>
       <Card sx={{ maxWidth: 345 }}>
         <CardHeader
-          title={`${rocket_name} (${mission_name})`}
-          subheader={moment(launch_date_utc).format("DD-MMM-yyyy")}
+          title={`${rocket_name}`}
+          // subheader={moment(launch_date_utc).format("DD-MMM-yyyy")}
+          subheader={mission_name}
           subheaderTypographyProps={
             launch_success ? { color: "green" } : { color: "red" }
           }

@@ -31,15 +31,15 @@ const drawerWidth = 240;
 const navItems = [
   {
     title: "Home",
-    component: null,
+    link: "/",
   },
   {
     title: "Search",
-    component: <SearchField></SearchField>,
+    link: "/search",
   },
   {
     title: "Filter",
-    component: <FilterField></FilterField>,
+    link: "/filter",
   },
 ];
 
@@ -51,18 +51,10 @@ export default function Navbar(props: Props) {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const {
-    navItemsHookData: { dispatch,  },
-  } = useContext(GlobalContext);
+
 
   const navigate = useNavigate();
 
-  const handleNavItem = (data: any) => {
-    if (data.type === "Home") {
-      return navigate("/");
-    }
-    dispatch({ type: data.type, payload: data.payload });
-  };
 
 
   const drawer = (
@@ -111,7 +103,7 @@ export default function Navbar(props: Props) {
             {navItems.map((item) => (
               <Button
                 onClick={() =>
-                  handleNavItem({ type: item.title, payload: item.component })
+                  navigate(item.link)
                 }
                 key={item.title}
                 sx={{ color: "#fff" }}

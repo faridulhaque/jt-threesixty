@@ -17,7 +17,11 @@ const SearchField = () => {
         //   }}
         noValidate
         autoComplete="off"
+        marginTop="100px"
         marginBottom="50px"
+        width="96%"
+        marginLeft="2%"
+        marginRight="2%"
       >
         <TextField
           onChange={(e) => setSearchedText(e.target.value)}
@@ -25,6 +29,7 @@ const SearchField = () => {
           label="Search by rocket name"
           variant="outlined"
         />
+        
       </Box>
     </>
   );

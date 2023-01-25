@@ -5,7 +5,6 @@ const useNavbarItems = () => {
   const initialState = null;
 
   const handleNavItem = (state: any, action: any) => {
-    console.log(action)
     return (state = action.payload);
   };
 
