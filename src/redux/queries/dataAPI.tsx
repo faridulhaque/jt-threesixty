@@ -18,3 +18,4 @@ const dataAPI = apiSlice.injectEndpoints({
       }),
   }),
 });
+export const {useGetAllDataQuery, useGetOneDataQuery} = dataAPI

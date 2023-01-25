@@ -2,11 +2,9 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+function App({children}:any) {
   return (
-    <div className="App">
-      <h1>Hello my man</h1>
-    </div>
+    <></>
   );
 }
 
