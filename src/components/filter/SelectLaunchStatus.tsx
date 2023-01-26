@@ -32,7 +32,6 @@ export default function SelectLaunchStatus({
     }
     setLaunchStatus(event.target.value as string);
 
-    setLaunchedData(data.filter((d: any) => d.launch_success === isLaunched));
   };
 
   return (
