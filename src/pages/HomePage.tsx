@@ -5,7 +5,7 @@ import Navbar from "../components/shared/Navbar";
 import { GlobalContext } from "../context/ContextProvider";
 import { useGetAllDataQuery } from "../redux/queries/dataAPI";
 
-const HomePage = () => {
+const HomePage = ():any => {
  
 
   const { data, isLoading, error } = useGetAllDataQuery(null);
