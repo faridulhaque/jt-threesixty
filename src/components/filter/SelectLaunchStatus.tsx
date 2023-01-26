@@ -8,17 +8,22 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 type statusTypes = {
   launchStatus: string;
   setLaunchStatus: any;
+  setUpcoming:any;
+  
 
 };
 
 export default function SelectLaunchStatus({
   launchStatus,
   setLaunchStatus,
+  setUpcoming
 
 }: statusTypes) {
   const handleChange = (event: SelectChangeEvent) => {
   
     setLaunchStatus(event.target.value as string);
+    setUpcoming(false)
+
 
   };
 

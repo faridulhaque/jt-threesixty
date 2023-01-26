@@ -20,7 +20,7 @@ export default function UpcomingCheck({
   };
   return (
     <div>
-      <Checkbox onClick={handleUpcoming} {...label} />
+      <Checkbox checked={upcoming} onClick={handleUpcoming} {...label} />
       Upcoming
     </div>
   );

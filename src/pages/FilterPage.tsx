@@ -1,4 +1,3 @@
-import { Box, Button } from "@mui/material";
 import moment from "moment";
 import React, { useState } from "react";
 import SelectLaunchStatus from "../components/filter/SelectLaunchStatus";
@@ -6,6 +5,9 @@ import SelectTime from "../components/filter/SelectTime";
 import UpcomingCheck from "../components/filter/UpcomingCheck";
 import Navbar from "../components/shared/Navbar";
 import { useGetAllDataQuery } from "../redux/queries/dataAPI";
+import { Box, Button, Grid } from "@mui/material";
+import ItemCard from "../components/home/ItemCard";
+
 
 const FilterPage = () => {
   const { data, isLoading, error } = useGetAllDataQuery(null);
@@ -39,14 +41,42 @@ const FilterPage = () => {
       setLaunchStatus("");
       const newTimeValue = timeValue.toString();
 
-      
       if (timeName === "last year") {
-        setDataToShow((data.filter((d: any) => d.launch_year == newTimeValue)))
+        setDataToShow(data.filter((d: any) => d.launch_year == newTimeValue));
+      } else if (timeName === "last month") {
+        let currentDate = new Date();
+        let lastMonth = new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth() - 1,
+          currentDate.getDate()
+        );
+        const filterArr = moment(lastMonth).format("DD-MMM-yyyy").split("-");
+        const filterDate = filterArr[1] + "-" + filterArr[2];
+        setDataToShow(
+          data.filter((d: any) =>
+            moment(d.launch_date_utc).format("DD-MMM-yyyy").includes(filterDate)
+          )
+        );
+      } else {
+        const lastWeek:any = [];
+        const today = moment();
+        for (let i = 0; i < 7; i++) {
+          lastWeek.push(
+            moment(today).subtract(i, "days").format("DD-MMM-yyyy")
+          );
+        }
+        const filteredArr = data.filter((d:any) =>
+          lastWeek.some((day:any) =>moment(d.launch_date_utc).format("DD-MMM-yyyy") === moment(day).format("DD-MMM-yyyy"))
+        );
+        console.log(filteredArr); // [{id: 1, name: 'apple'}]
+        // setDataToShow(data.filter((d: any) => {
+        //   return
+        // }));
       }
     }
   };
 
-  console.log(dataToShow);
+  
 
   if (isLoading) {
     return <h2>Loading..</h2>;
@@ -63,8 +93,11 @@ const FilterPage = () => {
           <SelectTime
             setTimeName={setTimeName}
             setTimeValue={setTimeValue}
+            setUpcoming={setUpcoming}
           ></SelectTime>
           <SelectLaunchStatus
+            setUpcoming={setUpcoming}
+
             launchStatus={launchStatus}
             setLaunchStatus={setLaunchStatus}
           ></SelectLaunchStatus>
@@ -84,6 +117,26 @@ const FilterPage = () => {
           Refresh
         </Button>
       </Box>
+
+      <Grid
+          container
+          rowSpacing={10}
+          columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3, xl: 4 }}
+        >
+          {dataToShow.map((d: any) => (
+            <Grid
+              key={d.flight_number}
+              item
+              xs={12}
+              sm={12}
+              md={6}
+              lg={4}
+              xl={3}
+            >
+              <ItemCard item={d}></ItemCard>
+            </Grid>
+          ))}
+        </Grid>
     </>
   );
 };

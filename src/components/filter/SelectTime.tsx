@@ -8,14 +8,17 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 type timeTypes = {
   setTimeValue: any;
   setTimeName: any
+  setUpcoming:any
 };
 
 export default function SelectTime({
   setTimeValue,
   setTimeName,
+  setUpcoming
 }: timeTypes) {
   const handleChange = (event: SelectChangeEvent) => {
     setTimeName(event.target.value as string);
+    setUpcoming(false)
 
     if (event.target.value === "last year") {
       const currentYear = new Date().getFullYear();
