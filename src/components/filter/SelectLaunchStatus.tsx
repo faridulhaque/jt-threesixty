@@ -8,34 +8,22 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 type statusTypes = {
   launchStatus: string;
   setLaunchStatus: any;
-  isLaunched: boolean;
-  setLaunched: any;
-  launchedData: any;
-  setLaunchedData: any;
-  data: any;
+
 };
 
 export default function SelectLaunchStatus({
-  isLaunched,
-  setLaunched,
   launchStatus,
   setLaunchStatus,
-  setLaunchedData,
-  launchedData,
-  data,
+
 }: statusTypes) {
   const handleChange = (event: SelectChangeEvent) => {
-    if (event.target.value === "success") {
-      setLaunched(true);
-    } else {
-      setLaunched(false);
-    }
+  
     setLaunchStatus(event.target.value as string);
 
   };
 
   return (
-    <Box sx={{ width: "200px" }}>
+    <Box sx={{ width: "200px", marginLeft: "15px" }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Status</InputLabel>
         <Select

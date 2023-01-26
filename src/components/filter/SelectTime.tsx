@@ -6,17 +6,13 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 type timeTypes = {
-  timeName: string;
-  setTimeName: any;
   setTimeValue: any;
-  setLastWeek: any;
+  setTimeName: any
 };
 
 export default function SelectTime({
-  timeName,
-  setTimeName,
   setTimeValue,
-  setLastWeek
+  setTimeName,
 }: timeTypes) {
   const handleChange = (event: SelectChangeEvent) => {
     setTimeName(event.target.value as string);
@@ -28,7 +24,7 @@ export default function SelectTime({
       
       const currentMonth = new Date().getMonth();
       if (currentMonth === 0) {
-        setTimeValue("-" + 12);
+        setTimeValue(12);
       }
       else if(currentMonth === 1 || currentMonth === 2 || currentMonth === 3 || currentMonth === 4 || currentMonth === 5 || currentMonth === 6 || currentMonth === 7 || currentMonth === 8 || currentMonth === 9){
         setTimeValue("-0" + currentMonth)
@@ -42,7 +38,7 @@ export default function SelectTime({
   };
 
   return (
-    <Box sx={{ width: "200px", marginLeft: "15px" }}>
+    <Box sx={{ width: "200px"}}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Time</InputLabel>
         <Select
