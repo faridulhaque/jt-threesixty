@@ -1,71 +1,62 @@
 import * as React from "react";
-import { Theme, useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
+import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
+type timeTypes = {
+  timeName: string;
+  setTimeName: any;
+  setTimeValue: any;
+  setLastWeek: any;
 };
 
-const names = ["Last week", "Last month", "Last year"];
+export default function SelectTime({
+  timeName,
+  setTimeName,
+  setTimeValue,
+  setLastWeek
+}: timeTypes) {
+  const handleChange = (event: SelectChangeEvent) => {
+    setTimeName(event.target.value as string);
 
-function getStyles(name: string, personName: string[], theme: Theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-export default function SelectTime() {
-  const theme = useTheme();
-  const [personName, setPersonName] = React.useState<string[]>([]);
-
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    if (event.target.value === "last year") {
+      const currentYear = new Date().getFullYear();
+      setTimeValue(currentYear - 1);
+    } else if (event.target.value === "last month") {
+      
+      const currentMonth = new Date().getMonth();
+      if (currentMonth === 0) {
+        setTimeValue("-" + 12);
+      }
+      else if(currentMonth === 1 || currentMonth === 2 || currentMonth === 3 || currentMonth === 4 || currentMonth === 5 || currentMonth === 6 || currentMonth === 7 || currentMonth === 8 || currentMonth === 9){
+        setTimeValue("-0" + currentMonth)
+      }
+    }
+    else{
+      const oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      setTimeValue(oneWeekAgo)
+    }
   };
 
   return (
-    <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-name-label">Select time</InputLabel>
+    <Box sx={{ width: "200px", marginLeft: "15px" }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Time</InputLabel>
         <Select
-          labelId="demo-multiple-name-label"
-          id="demo-multiple-name"
-          multiple
-          value={personName}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          // value={launchStatus}
+          label="Age"
           onChange={handleChange}
-          input={<OutlinedInput label="Name" />}
-          MenuProps={MenuProps}
         >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
+          <MenuItem value="last year">Last year</MenuItem>
+          <MenuItem value="last month">Last month</MenuItem>
+          <MenuItem value="last week">Last week</MenuItem>
         </Select>
       </FormControl>
-    </div>
+    </Box>
   );
 }
