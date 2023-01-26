@@ -51,11 +51,7 @@ export default function Navbar(props: Props) {
     setMobileOpen((prevState) => !prevState);
   };
 
-
-
   const navigate = useNavigate();
-
-
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -66,7 +62,10 @@ export default function Navbar(props: Props) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item.title} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemButton
+              onClick={() => navigate(item.link)}
+              sx={{ textAlign: "center" }}
+            >
               <ListItemText primary={item?.title} />
             </ListItemButton>
           </ListItem>
@@ -102,9 +101,7 @@ export default function Navbar(props: Props) {
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <Button
-                onClick={() =>
-                  navigate(item.link)
-                }
+                onClick={() => navigate(item.link)}
                 key={item.title}
                 sx={{ color: "#fff" }}
               >
