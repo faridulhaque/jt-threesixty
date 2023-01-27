@@ -65,7 +65,7 @@ const HomePage = ():any => {
           {sliced >= data.length ? (
             <Button onClick={() => setSliced(20)}>See Less</Button>
           ) : (
-            <Button onClick={() => setSliced(sliced + 20)}>See More</Button>
+            <Button onClick={() => setSliced(sliced + 20)}>See More Items</Button>
           )}
         </Box>
       </div>

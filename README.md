@@ -1,46 +1,18 @@
-# Getting Started with Create React App
+# M360ICT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Live Site](https://magenta-pudding-b60848.netlify.app/).
 
-## Available Scripts
+## App Details
+### JOb task from M360ICT
 
-In the project directory, you can run:
+* The app has four routes: 1) Home, 2) Search 3) Filter 4) Item Details
+* The home page contains the first 20 items. There is a 'see more items' button below, every time you click on it, there will be added 20 more items. 
+* By clicking on "See More" from each item, You will be redirected to the details page of that specific item. 
+* In the Search Page, primarily you will see all data but when you start typing in the search box, your required items will appear. 
+* On the Filter page, you can filter data by upcoming, Status (success, failure), or by time. (last week, last month, or last year). Unfortunately, there are no data from the last year, last month, or last week in this API, so, practically you won't see any data right now by filtering with time. But I created and implemented logic and checked with fake data. The logic is completely fine. 
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Tools
+* React 
+* Material UI
+* TypeScript
+* React Redux & Rtk query
